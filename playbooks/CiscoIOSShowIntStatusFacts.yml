@@ -1,0 +1,170 @@
+---
+
+- hosts: CampusDist
+# Include Clays Collection # 
+# https://github.com/clay584/parse_genie #  
+  collections:
+    - clay584.genie
+  vars_prompt:
+    - name: IOS_User_Prompt
+      prompt: "Enter Cisco IOS Username"
+      private: no 
+    - name: IOS_Password_Prompt
+      prompt: "Enter IOS Password"
+      private: yes   
+  tasks:
+# Register Username and Password #
+    - set_fact:   
+        ios_user: "{{ IOS_User_Prompt }}"     
+        ios_password: "{{ IOS_Password_Prompt }}"
+      no_log: true
+      delegate_to: localhost
+      run_once: true   
+
+# Gather Show Interfaces Status #
+    - name: show interfaces status
+      ios_command:
+        commands:
+          - show interfaces status
+      register: int_status_raw
+
+# Genie Parse Raw response #
+    - name: Set Fact Genie Filter 
+      set_fact:
+        pyatsint_status_raw: "{{ int_status_raw['stdout'][0] | parse_genie(command='show interfaces status', os='ios') }}"
+
+# Print facts on screen #          
+    - debug: 
+        msg: "{{ pyatsint_status_raw }}"
+
+# Create RAW JSON, Nice JSON, Nice YAML Files #
+# Create JSON file with Ansible Facts #
+    - name: Create RAW JSON file
+      copy: 
+        content: | 
+          {{ pyatsint_status_raw }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status_RAW.json
+
+# Create JSON file with Ansible Facts #
+    - name: Create raw JSON file
+      copy: 
+        content: | 
+          {{ pyatsint_status_raw | to_nice_json }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status_Nice.json
+
+# Create YAML file with Ansible Facts #
+    - name: Create raw YAML
+      copy: 
+        content: | 
+          {{ pyatsint_status_raw | to_nice_yaml }}
+        dest: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.yml
+
+# Add Headers to YAML #
+    - name: Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.yml
+        insertbefore: BOF
+        line: ---        
+      delegate_to: localhost
+
+# Create CSV File #
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.csv
+        state: absent
+
+# Create Interface CSV file with results #
+    - name: CSV Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.csv
+        line: "{{ item.key }},{% if item.value.name is defined %}{{ item.value.name }}{% else %}No Description{% endif %},{{ item.value.status }},{{ item.value.port_speed }},{{ item.value.duplex_code }},{{ item.value.vlan }}"
+        create: yes
+      loop: "{{ pyatsint_status_raw.interfaces | dict2items }}"
+
+# Format CSV #
+    - name: Format CSV File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.csv
+        regexp: '\[|\]|"'
+        replace: ''      
+ 
+# Format CSV #
+    - name: Format CSV File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.csv       
+        regexp: "'"
+        replace: ''
+ 
+# Add Header Row to CSV #
+    - name: CSV Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.csv       
+        insertbefore: BOF
+        line: Interface,Name,Status,Speed,Duplex,VLAN
+
+# Create Mark Down File #
+# Remove file #
+    - name: Remove file (delete file)
+      file:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md
+        state: absent
+
+# Create Interface Markdown file with results #
+    - name: Markdown Data Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md
+        line: "| {{ item.key }} | {% if item.value.name is defined %}{{ item.value.name }}{% else %}No Description{% endif %} | {{ item.value.status }} | {{ item.value.port_speed }} | {{ item.value.duplex_code }} | {{ item.value.vlan }} |"
+        create: yes
+      loop: "{{ pyatsint_status_raw.interfaces | dict2items }}"
+
+# Format MD #
+    - name: Format MD File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md
+        regexp: '\[|\]|"'
+        replace: ''      
+ 
+# Format MD #
+    - name: Format MD File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md       
+        regexp: "'"
+        replace: ''
+ 
+# Format MD #
+    - name: Format MD File Clean Up
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md       
+        regexp: ","
+        replace: " | "
+
+# Format Markdown #
+    - name: Format Markdown File New Lines
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md 
+        regexp: '^'
+        replace: '| '
+  
+# Format Markdown #
+    - name: Format Markdown File New Lines
+      replace:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md 
+        regexp: '$'
+        replace: ' |' 
+
+# Add Header Rows to Markdown #
+    - name: Markdown Header Row
+      lineinfile:
+        path: ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md     
+        insertbefore: BOF
+        line: "{{ item.property }}"
+      with_items:
+        - { property: '| --------- | ---- | ------ | ----- | ------ | ---- |' }
+        - { property: '| Interface | Name | Status | Speed | Duplex | VLAN |' }
+        - { property: '# Show Interface Status for {{ inventory_hostname }}' }      
+
+# Create Mind Map # 
+    - name: create Show Interfaces Status Mind Map 
+      shell: "npx markmap-cli ../documentation/FACTS/CAMPUS/DISTRIBUTION/{{ inventory_hostname }}_Show_Int_Status.md"
+      register: markmap        

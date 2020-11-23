@@ -1,0 +1,288 @@
+{
+    "interfaces": {
+        "Port-channel1": {
+            "duplex_code": "a-full",
+            "name": "Core Uplink",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "vlan": "routed"
+        },
+        "Port-channel2": {
+            "duplex_code": "auto",
+            "name": "SWITCH01 Uplink",
+            "port_speed": "auto",
+            "status": "notconnect",
+            "vlan": "trunk"
+        },
+        "Port-channel50": {
+            "duplex_code": "a-full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "vlan": "trunk"
+        },
+        "Port-channel60": {
+            "duplex_code": "a-full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet1/1/1": {
+            "duplex_code": "full",
+            "name": "Core Uplink",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "type": "1000BaseLH",
+            "vlan": "routed"
+        },
+        "TenGigabitEthernet1/1/10": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/11": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/12": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/13": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/14": {
+            "duplex_code": "full",
+            "name": "DAD",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "type": "1000BaseT",
+            "vlan": "1"
+        },
+        "TenGigabitEthernet1/1/15": {
+            "duplex_code": "full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "type": "10GBase-CU 1M",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet1/1/16": {
+            "duplex_code": "full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "type": "10GBase-CU 1M",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet1/1/2": {
+            "duplex_code": "full",
+            "name": "SWITCH01 Uplink",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "type": "1000BaseT",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet1/1/3": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "1000BaseT",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/4": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/5": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/6": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/7": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/8": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet1/1/9": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/1": {
+            "duplex_code": "full",
+            "name": "Core Uplink",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "type": "1000BaseLH",
+            "vlan": "routed"
+        },
+        "TenGigabitEthernet2/1/10": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/11": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/12": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/13": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/14": {
+            "duplex_code": "full",
+            "name": "DAD",
+            "port_speed": "a-1000",
+            "status": "connected",
+            "type": "1000BaseT",
+            "vlan": "1"
+        },
+        "TenGigabitEthernet2/1/15": {
+            "duplex_code": "full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "type": "10GBase-CU 1M",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet2/1/16": {
+            "duplex_code": "full",
+            "name": "VSL",
+            "port_speed": "a-10G",
+            "status": "connected",
+            "type": "10GBase-CU 1M",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet2/1/2": {
+            "duplex_code": "full",
+            "name": "SWITCH01 Uplink",
+            "port_speed": "a-1000",
+            "status": "suspended",
+            "type": "1000BaseT",
+            "vlan": "trunk"
+        },
+        "TenGigabitEthernet2/1/3": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "1000BaseT",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/4": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/5": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/6": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/7": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/8": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        },
+        "TenGigabitEthernet2/1/9": {
+            "duplex_code": "full",
+            "name": "Unused",
+            "port_speed": "auto",
+            "status": "disabled",
+            "type": "No XCVR",
+            "vlan": "99"
+        }
+    }
+}
